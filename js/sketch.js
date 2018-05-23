@@ -18,10 +18,6 @@ var isFading = false;
 
 var circles = [];
 
-
-
-
-
 function preload() {
   var imgs = ["img01.jpg", "img02.jpg", "img03.jpg", "img04.jpg", "img05.jpg", "img06.jpg", "img07.jpg", "img08.jpg", "img09.jpg", "img10.jpg", "img11.jpg", "img12.jpg", "img13.jpg", "img14.jpg"]
   var path = 'img/';
@@ -37,16 +33,11 @@ function preload() {
   fontRegular = loadFont('regular.ttf');
 }
 
-
-
-
 function setup() {
-
   createCanvas(1024, 767);
   ellipseMode(CENTER); // Set ellipseMode to CENTER
   console.clear();
   console.log("CLICK to see what the computer understands \n Pictures are revealed at the end \n\n\n The machine analyses the rectangle around where you click ")
-
   /*
 
 CLICK to see what the computer
@@ -121,19 +112,12 @@ function draw() {
 
     circle.r += 5;
     ellipse(circle.x, circle.y, circle.r, circle.r);
-
   }
-
 
   if (textData.length >= 80) {
     fadeIn();
   }
 }
-
-
-
-
-
 
 function mousePressed() {
   var s = 120;
@@ -155,10 +139,6 @@ function mousePressed() {
     console.log("CROP IS NULL")
   }
 }
-
-
-
-
 
 function sendBase64ToClarifai(imgData, posX, posY) {
   isSpeaking = true;
@@ -195,12 +175,9 @@ function sendBase64ToClarifai(imgData, posX, posY) {
       };
 
       textData.push(txtData);
-
     },
 
     function(err) {
-
-
       console.log("Error happened");
       console.log(err);
     }
