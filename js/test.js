@@ -1,6 +1,4 @@
-const app = new Clarifai.App({
-  apiKey: 'b4c34657e0a448819177a1c9b923481e'
-});
+// todo - check if the calculations are ok
 
 var concepts;
 var cols = 0;
@@ -10,8 +8,8 @@ var isSpeaking = false;
 
 var textData = [];
 var fontRegular;
-
 var s = 100;
+
 
 var msg = new SpeechSynthesisUtterance(' ');
 msg.voice = window.speechSynthesis.getVoices()[1];
@@ -19,12 +17,10 @@ window.speechSynthesis.speak(msg);
 
 var a = 0;
 var isFading = false;
-// data.data.concepts
 
 var circles = [];
 
 function preload() {
-  // img files end in jpg, data files end in json
   var files = ["img01", "img02", "img03", "img04", "img05", "img06", "img07",
                "img08", "img09", "img10", "img11", "img12", "img13", "img14"]
   var img_path = 'img/';
@@ -37,6 +33,8 @@ function preload() {
   }
 
   var randIdx = Math.floor(Math.random() * data.length);
+  randIdx = 6;
+
   img = loadImage(data[randIdx].img);
   console.log(data[randIdx].data)
   d = loadJSON(data[randIdx].data);
@@ -47,7 +45,6 @@ function preload() {
 function setup() {
   createCanvas(1024, 767);
   ellipseMode(CENTER);
-  textAlign(CENTER);
 
   concepts = d.concepts;
   rows = concepts.length;
@@ -58,7 +55,7 @@ function setup() {
 
   console.log(concepts);
 
-  frameRate(30);
+  frameRate(20);
 
   fill('rgba(255, 255, 255)');
   rect(0, 0, width, height);
@@ -81,15 +78,31 @@ function keyPressed() {
 function draw() {
   background(255);
 
-  if (isFading) {
-    a = a + 1;
-    tint(255, 255, 255, a);
-    if (a >= 300) {
-      document.location.reload(true);
-    }
+  // if (isFading) {
+  //   a = a + 1;
+  //   tint(255, 255, 255, a);
+  //   if (a >= 300) {
+  //     document.location.reload(true);
+  //   }
+  //
+  //   image(img, 0, 0);
+  // }
+  tint(255, 0, 255, 125)
+  image(img, 0, 0);
 
-    image(img, 0, 0);
+  stroke(255);
+  noFill();
+  strokeWeight(1);
+
+  textAlign(CENTER);
+  for (var c = 0; c < cols; c++) {
+    line(c * s, 0, c * s, height);
+    for (var r = 0; r < rows; r++) {
+      line(0, r * s, width, r * s);
+      text(concepts[r][c], c * s + s / 2, r * s + s / 2);
+    }
   }
+
 
   stroke(0, 0, 0, 255);
 
@@ -99,22 +112,19 @@ function draw() {
   for (var i = 0; i < textData.length; i++) {
     var txtData = textData[i];
     fill(0, 0, 0);
-    text(txtData.mot, txtData.x, txtData.y);
+    console.log("draw " + txtData);
+    text(txtData.mot, txtData.x + 50, txtData.y + 40, 1000, 1000); /////
   }
   strokeWeight(1);
 
-  for (var i = circles.length - 1; i >= 0; i--) {
+  for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
 
     stroke(0, 0, 0, 1 / circle.r * 2000);
     noFill();
 
-    circle.r += 4;
+    circle.r += 5;
     ellipse(circle.x, circle.y, circle.r, circle.r);
-
-    if (circle.r > 400) {
-      circles.splice(i, 1);
-    }
   }
 
   if (textData.length >= 80) {
@@ -125,8 +135,8 @@ function draw() {
 function mousePressed() {
 
   // get concept
-  var x = Math.floor(mouseX / s);
-  var y = Math.floor(mouseY / s);
+  var x = Math.floor(mouseX / width * cols);
+  var y = Math.floor(mouseY / height * rows);
 
   console.log(x);
   console.log(y);
@@ -148,18 +158,18 @@ function mousePressed() {
   isSpeaking = true;
 
   var msg = new SpeechSynthesisUtterance(concept);
-  //msg.voice = window.speechSynthesis.getVoices()[1];
+  msg.voice = window.speechSynthesis.getVoices()[1];
 
-  // window.speechSynthesis.speak(msg);
+  window.speechSynthesis.speak(msg);
 
-  // msg.onerror = function(event) {
-  //   console.log('An error has occurred with the speech synthesis: ' + event.error);
-  //   isSpeaking = false;
-  // }
+  msg.onerror = function(event) {
+    console.log('An error has occurred with the speech synthesis: ' + event.error);
+    isSpeaking = false;
+  }
 
-  // msg.onend = function(e) {
-  //   isSpeaking = false;
-  // }
+  msg.onend = function(e) {
+    isSpeaking = false;
+  }
 
-  textData.push({'mot': concept, 'x': mouseX, 'y': mouseY});
+  textData.push({'mot': concept, 'x': mouseX - s / 2, 'y': mouseY - s / 2});
 }
