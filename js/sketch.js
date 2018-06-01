@@ -42,7 +42,10 @@ function preload() {
 
 function setup() {
 
-  createCanvas(1024, 767);
+  //createCanvas();
+  var canvas = document.createElement('canvas');
+  canvas.width = div.clientWidth;
+  canvas.height = div.clientHeight;
   ellipseMode(CENTER); // Set ellipseMode to CENTER
   console.clear();
   console.log("CLICK to see what the computer understands \n Pictures are revealed at the end \n\n\n The machine analyses the rectangle around where you click ")

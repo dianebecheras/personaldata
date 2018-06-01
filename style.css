@@ -1,0 +1,107 @@
+body {
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+canvas {
+  display: flex;
+  border: 3px solid black;
+  margin: -3em;
+position: fixed;
+
+}
+
+p.titre{
+font-family: 'Source Sans Pro', sans-serif;
+position: fixed;
+bottom: 8px;
+font-size: 40px;
+}
+
+.pop-up-button{
+    position: fixed;
+    top:0.5em;
+    left: 1.5em;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 40px;
+}
+
+.pop-up {
+  z-index:1;
+  font-size: 30px;
+  position:absolute;
+  font-family: 'Source Sans Pro', sans-serif;
+  pointer-events: none;
+  opacity: 0;
+
+  color: red;
+  top:2em;
+  right: 1em;
+  left:1.5em;
+}
+
+.pop-up-button:hover + .pop-up {
+  opacity: 1;
+}
+
+
+@media only screen and (max-width:500px) {
+
+  overflow: hidden;
+  body{
+    overflow: hidden;
+  }
+  .pop-up {
+    font-size: 12px;
+
+  }
+
+    canvas{
+      width: 300px;
+      height: 220px;
+      position: fixed;
+      top:180x;
+
+    }
+
+    p.titre{
+    font-family: 'Source Sans Pro', sans-serif;
+    position: fixed;
+    bottom: 50px;
+    font-size: 12px;
+    }
+
+
+    .pop-up-button{
+        position: fixed;
+        top:0.5em;
+        left: 0.5em;
+        font-family: 'Source Sans Pro', sans-serif;
+        font-size: 25px;
+    }
+
+    .pop-up{
+      font-size: 25px;
+      position: fixed;
+
+    }
+
+
+}
+
+@media only screen and (max-width:880px) {
+
+  canvas{
+    width: 800px;
+    
+    position: fixed;
+    top:180x;
+
+  }
+
+}
