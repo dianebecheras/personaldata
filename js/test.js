@@ -10,7 +10,6 @@ var textData = [];
 var fontRegular;
 var s = 100;
 
-
 var msg = new SpeechSynthesisUtterance(' ');
 msg.voice = window.speechSynthesis.getVoices()[1];
 window.speechSynthesis.speak(msg);
@@ -33,7 +32,7 @@ function preload() {
   }
 
   var randIdx = Math.floor(Math.random() * data.length);
-  randIdx = 6;
+  //randIdx = 6;
 
   img = loadImage(data[randIdx].img);
   console.log(data[randIdx].data)
@@ -94,6 +93,7 @@ function draw() {
   noFill();
   strokeWeight(1);
 
+  // Grid
   textAlign(CENTER);
   for (var c = 0; c < cols; c++) {
     line(c * s, 0, c * s, height);
@@ -102,7 +102,6 @@ function draw() {
       text(concepts[r][c], c * s + s / 2, r * s + s / 2);
     }
   }
-
 
   stroke(0, 0, 0, 255);
 
@@ -113,10 +112,11 @@ function draw() {
     var txtData = textData[i];
     fill(0, 0, 0);
     console.log("draw " + txtData);
-    text(txtData.mot, txtData.x + 50, txtData.y + 40, 1000, 1000); /////
+    text(txtData.mot, txtData.x, txtData.y); /////
   }
   strokeWeight(1);
 
+  // Circles
   for (var i = 0; i < circles.length; i++) {
     var circle = circles[i];
 
@@ -133,7 +133,6 @@ function draw() {
 }
 
 function mousePressed() {
-
   // get concept
   var x = Math.floor(mouseX / width * cols);
   var y = Math.floor(mouseY / height * rows);
@@ -145,7 +144,7 @@ function mousePressed() {
   x = constrain(x, 0, rows - 1);
   y = constrain(y, 0, height - 1);
 
-  var concept = concepts[x][y];
+  var concept = concepts[y][x];
 
   console.log(concept);
 
@@ -171,5 +170,5 @@ function mousePressed() {
     isSpeaking = false;
   }
 
-  textData.push({'mot': concept, 'x': mouseX - s / 2, 'y': mouseY - s / 2});
+  textData.push({'mot': concept, 'x': mouseX , 'y': mouseY});
 }

@@ -1,7 +1,3 @@
-const app = new Clarifai.App({
-  apiKey: 'b4c34657e0a448819177a1c9b923481e'
-});
-
 var concepts;
 var cols = 0;
 var rows = 0;
@@ -45,20 +41,9 @@ function preload() {
 }
 
 function setup() {
-
-  //createCanvas();
-  var canvas = document.createElement('canvas');
-  canvas.width = div.clientWidth;
-  canvas.height = div.clientHeight;
-  ellipseMode(CENTER); // Set ellipseMode to CENTER
-  console.clear();
-  console.log("CLICK to see what the computer understands \n Pictures are revealed at the end \n\n\n The machine analyses the rectangle around where you click ")
-
-  /*
-
-CLICK to see what the computer
-understands
-Pictures are revealed at the end
+  createCanvas(1024, 767);
+  ellipseMode(CENTER);
+  textAlign(CENTER);
 
   concepts = d.concepts;
   rows = concepts.length;
@@ -131,6 +116,19 @@ function draw() {
   if (textData.length >= 80) {
     fadeIn();
   }
+
+  // --- Print grid ---
+  // strokeWeight(1);
+  // stroke(0, 0, 0);
+  //
+  // textAlign(CENTER);
+  // for (var c = 0; c < cols; c++) {
+  //   line(c * s, 0, c * s, height);
+  //   for (var r = 0; r < rows; r++) {
+  //     line(0, r * s, width, r * s);
+  //     text(concepts[r][c], c * s + s / 2, r * s + s / 2);
+  //   }
+  // }
 }
 
 function mousePressed() {
@@ -143,10 +141,10 @@ function mousePressed() {
   console.log(y);
   // round down images
 
-  x = constrain(x, 0, rows - 1);
-  y = constrain(y, 0, height - 1);
+  x = constrain(x, 0, cols - 1);
+  y = constrain(y, 0, rows - 1);
 
-  var concept = concepts[x][y];
+  var concept = concepts[y][x];
 
   console.log(concept);
 
