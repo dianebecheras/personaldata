@@ -1,3 +1,25 @@
+
+var animationOverlay = document.querySelector(".ooo").animate(
+  [
+    { top: '-100vh'},
+    { top: '0vh'}
+  ], {
+    duration: 750,
+    fill: 'forwards',
+    easing: 'ease-in-out'
+  }
+);
+animationOverlay.playbackRate = -1;
+animationOverlay.pause();
+
+function toggleOverlay() {
+  animationOverlay.playbackRate = animationOverlay.playbackRate * -1;
+  animationOverlay.play();
+}
+
+document.querySelector(".pop-up-button").addEventListener('click', toggleOverlay);
+
+
 var concepts;
 var cols = 0;
 var rows = 0;
@@ -18,6 +40,8 @@ var isFading = false;
 // data.data.concepts
 
 var circles = [];
+
+var elParent;
 
 function preload() {
   // img files end in jpg, data files end in json
@@ -42,10 +66,17 @@ function preload() {
 
 function windowResized(){
   console.log("window resized");
+  var size = elParent.getBoundingClientRect();
+  resizeCanvas(Math.floor(size.width), Math.floor(size.height));
 }
 
 function setup() {
-  createCanvas(1024, 767);
+  elParent = document.querySelector('#sketch-holder');
+  var size = elParent.getBoundingClientRect();
+  var canvas = createCanvas(Math.floor(size.width), Math.floor(size.height));
+
+  canvas.parent('sketch-holder');
+
   ellipseMode(CENTER);
   textAlign(CENTER);
 

@@ -13,15 +13,20 @@ body {
   justify-content: center;
   overflow: hidden;
   position: relative;
+  font-family: 'Source Sans Pro', sans-serif;
+  font-size: 20px;
 }
 
 .ooo {
-  background-color: green;
+  background-color: white;
   position: absolute;
   left: 0px;
-  top: -99vh;
+  top: -100vh;
   width: 100vw;
   height: 100vh;
+  z-index: 1;
+  font-size: 2em;
+  padding: 10%;
 }
 
 #sketch-holder {
@@ -30,26 +35,10 @@ body {
   height: calc(var(--canvasWidth) * var(--aspectRatio));
 } 
 
-
-/* Animations */
-
-@keyframes slideIn {
-    from {
-        transform: translateY(100%);
-    }
-    to {
-        transform: translateY(0%);
-    }
-}
-
-.elementToAnimate{
-    animation: yourAnimation 0.8s 1 0s ease-in-out;
-}
-
 canvas {
   display: flex;
   border: 3px solid black;
-  margin: -3em;
+  /* margin: -3em; */
   position: fixed;
 }
 
@@ -69,23 +58,11 @@ font-size: 40px;
     font-size: 40px;
 }
 
-.pop-up {
-  z-index:1;
-  font-size: 30px;
-  position:absolute;
-  font-family: 'Source Sans Pro', sans-serif;
-  pointer-events: none;
-  opacity: 0;
 
-  color: red;
-  top:2em;
-  right: 1em;
-  left:1.5em;
+.pop-up-button {
+  z-index: 100;
 }
 
-.pop-up-button:hover + .pop-up {
-  opacity: 1;
-}
 
 @media only screen and (min-aspect-ratio: 4/3) {
   /* Define width by height */
