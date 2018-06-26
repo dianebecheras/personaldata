@@ -40,6 +40,10 @@ function preload() {
   fontRegular = loadFont('regular.ttf');
 }
 
+function windowResized(){
+  console.log("window resized");
+}
+
 function setup() {
   createCanvas(1024, 767);
   ellipseMode(CENTER);

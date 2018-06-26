@@ -1,9 +1,8 @@
-
-
-
-
-
-
+:root {
+  --aspectRatio: 0.75;
+  --canvasWidth: 90vw;
+  --canvasHeight: 90vh;
+}
 
 body {
   padding: 0;
@@ -13,15 +12,47 @@ body {
   align-items: center;
   justify-content: center;
   overflow: hidden;
+  position: relative;
+}
+
+.ooo {
+  background-color: green;
+  position: absolute;
+  left: 0px;
+  top: -99vh;
+  width: 100vw;
+  height: 100vh;
+}
+
+#sketch-holder {
+  background-color: red;
+  width: var(--canvasWidth);
+  height: calc(var(--canvasWidth) * var(--aspectRatio));
+} 
+
+
+/* Animations */
+
+@keyframes slideIn {
+    from {
+        transform: translateY(100%);
+    }
+    to {
+        transform: translateY(0%);
+    }
+}
+
+.elementToAnimate{
+    animation: yourAnimation 0.8s 1 0s ease-in-out;
 }
 
 canvas {
   display: flex;
   border: 3px solid black;
   margin: -3em;
-position: fixed;
-
+  position: fixed;
 }
+
 
 p.titre{
 font-family: 'Source Sans Pro', sans-serif;
@@ -56,6 +87,26 @@ font-size: 40px;
   opacity: 1;
 }
 
+@media only screen and (min-aspect-ratio: 4/3) {
+  /* Define width by height */
+  /* Define hight by width */
+  #sketch-holder {
+    width: calc(1 / var(--aspectRatio) * var(--canvasHeight));
+    height: var(--canvasHeight);
+
+    /* width: 1024px;
+    height: 768px; */
+  } 
+}
+
+@media only screen and (max-aspect-ratio: 4/3) {
+  #sketch-holder {
+    width: var(--canvasWidth);
+    height: calc(var(--canvasWidth) * var(--aspectRatio));
+    /* width: 1024px;
+    height: 768px; */
+  } 
+}
 
 @media only screen and (max-width:500px) {
 
@@ -68,7 +119,7 @@ font-size: 40px;
 
   }
 
-    canvas{
+    canvas {
       width: 300px;
       height: 220px;
       position: fixed;
@@ -76,7 +127,7 @@ font-size: 40px;
 
     }
 
-    p.titre{
+    p.titre {
     font-family: 'Source Sans Pro', sans-serif;
     position: fixed;
     bottom: 50px;
@@ -84,7 +135,7 @@ font-size: 40px;
     }
 
 
-    .pop-up-button{
+    .pop-up-button {
         position: fixed;
         top:0.5em;
         left: 0.5em;
@@ -92,17 +143,13 @@ font-size: 40px;
         font-size: 25px;
     }
 
-    .pop-up{
+    .pop-up {
       font-size: 25px;
       position: fixed;
-
     }
-
-
 }
 
 @media only screen and (max-width:880px) {
-
   canvas{
     width: 800px;
 
@@ -111,28 +158,4 @@ font-size: 40px;
 
   }
 
-}
-
-
-/* --- From index.html ---  */
-
-body {
-  padding: 0;
-  margin: 0;
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-canvas {
-  display: flex;
-  border: 3px solid black;
-}
-
-p.titre{
-font-family: 'Source Sans Pro', sans-serif;
-position: fixed;
-bottom: 8px;
-font-size: 40px;
 }
