@@ -17,7 +17,7 @@ function toggleOverlay() {
   animationOverlay.play();
 }
 
-document.querySelector(".pop-up-button").addEventListener('click', toggleOverlay);
+document.querySelector(".btn-round").addEventListener('click', toggleOverlay);
 
 
 var concepts;
@@ -42,6 +42,8 @@ var isFading = false;
 var circles = [];
 
 var elParent;
+
+var TEXT_WIDTH_PCT = 0.02;
 
 function preload() {
   // img files end in jpg, data files end in json
@@ -68,6 +70,8 @@ function windowResized(){
   console.log("window resized");
   var size = elParent.getBoundingClientRect();
   resizeCanvas(Math.floor(size.width), Math.floor(size.height));
+
+  textSize(width * TEXT_WIDTH_PCT);
 }
 
 function setup() {
@@ -93,8 +97,10 @@ function setup() {
 
   fill('rgba(255, 255, 255)');
   rect(0, 0, width, height);
-  fill(0)
-    .textSize(15);
+  fill(0);
+
+  textSize(width * TEXT_WIDTH_PCT);
+
   textFont(fontRegular);
   text('Font Style Normal');
 }
