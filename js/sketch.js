@@ -197,10 +197,10 @@ function mousePressed() {
 
   isSpeaking = true;
 
-  // var msg = new SpeechSynthesisUtterance(concept);
-  //msg.voice = window.speechSynthesis.getVoices()[1];
+  var msg = new SpeechSynthesisUtterance(concept);
+  msg.voice = window.speechSynthesis.getVoices()[1];
 
-  // window.speechSynthesis.speak(msg);
+   window.speechSynthesis.speak(msg);
 
   // msg.onerror = function(event) {
   //   console.log('An error has occurred with the speech synthesis: ' + event.error);
