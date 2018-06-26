@@ -14,7 +14,7 @@ body {
   overflow: hidden;
   position: relative;
   font-family: 'Source Sans Pro', sans-serif;
-  font-size: 20px;
+  font-size: 100%;
 }
 
 .ooo {
@@ -30,16 +30,21 @@ body {
 }
 
 #sketch-holder {
-  background-color: red;
   width: var(--canvasWidth);
   height: calc(var(--canvasWidth) * var(--aspectRatio));
+  overflow: visible;
 } 
+
+
+#defaultCanvas0 {
+  border: 3px solid black !important;
+}
 
 canvas {
   display: flex;
-  border: 3px solid black;
   /* margin: -3em; */
   position: fixed;
+  border: 3px solid black;
 }
 
 
@@ -67,6 +72,10 @@ font-size: 40px;
 @media only screen and (min-aspect-ratio: 4/3) {
   /* Define width by height */
   /* Define hight by width */
+  body {
+    font-size: 20px;
+  }
+
   #sketch-holder {
     width: calc(1 / var(--aspectRatio) * var(--canvasHeight));
     height: var(--canvasHeight);
@@ -77,6 +86,8 @@ font-size: 40px;
 }
 
 @media only screen and (max-aspect-ratio: 4/3) {
+
+
   #sketch-holder {
     width: var(--canvasWidth);
     height: calc(var(--canvasWidth) * var(--aspectRatio));
@@ -86,6 +97,8 @@ font-size: 40px;
 }
 
 @media only screen and (max-width:500px) {
+
+
 
   overflow: hidden;
   body{
