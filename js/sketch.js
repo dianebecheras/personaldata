@@ -130,7 +130,7 @@ function draw() {
   for (var i = 0; i < textData.length; i++) {
     var txtData = textData[i];
     fill(0, 0, 0);
-    text(txtData.mot, txtData.x, txtData.y);
+    text(txtData.mot, txtData.x * width, txtData.y * height);
   }
   strokeWeight(1);
 
@@ -141,7 +141,7 @@ function draw() {
     noFill();
 
     circle.r += 4;
-    ellipse(circle.x, circle.y, circle.r, circle.r);
+    ellipse(circle.x * width, circle.y * height, circle.r, circle.r);
 
     if (circle.r > 400) {
       circles.splice(i, 1);
@@ -172,8 +172,8 @@ function mousePressed() {
   var x = Math.floor(mouseX / s);
   var y = Math.floor(mouseY / s);
 
-  console.log(x);
-  console.log(y);
+  // console.log(x);
+  // console.log(y);
   // round down images
 
   x = constrain(x, 0, cols - 1);
@@ -184,14 +184,14 @@ function mousePressed() {
   console.log(concept);
 
   circles.push({
-    'x': mouseX,
-    'y': mouseY,
+    'x': mouseX / width,
+    'y': mouseY / height,
     'r': 0
   });
 
   isSpeaking = true;
 
-  var msg = new SpeechSynthesisUtterance(concept);
+  // var msg = new SpeechSynthesisUtterance(concept);
   //msg.voice = window.speechSynthesis.getVoices()[1];
 
   // window.speechSynthesis.speak(msg);
@@ -205,5 +205,5 @@ function mousePressed() {
   //   isSpeaking = false;
   // }
 
-  textData.push({'mot': concept, 'x': mouseX, 'y': mouseY});
+  textData.push({'mot': concept, 'x': mouseX / width, 'y': mouseY/height});
 }
